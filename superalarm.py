@@ -1,3 +1,4 @@
+#imprt librerrys
 import RPi.GPIO as GPIO
 import time
 import os
@@ -9,7 +10,9 @@ from email.MIMEText import MIMEText
 from email.MIMEAudio import MIMEAudio
 from email.MIMEImage import MIMEImage
 from email.Encoders import encode_base64
+#funtion to send an email
 def sendMail(subject, text):
+  #change identety to username and password
   gmailUser = 'user@domain.net'
   gmailPassword = 'pa55Word'
   recipient = 'otheruser@domain.net'
@@ -18,6 +21,7 @@ def sendMail(subject, text):
   msg['To'] = recipient
   msg['Subject'] = subject
   msg.attach(MIMEText(text))
+  #gmails mail server
   mailServer = smtplib.SMTP('smtp.gmail.com', 587)
   mailServer.ehlo()
   mailServer.starttls()
@@ -27,11 +31,13 @@ def sendMail(subject, text):
   mailServer.close()
   print'Sent email to %s' % recipient
 
+#set up the general perpose input output
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup (11, GPIO.IN)
 GPIO.setup (12, GPIO.OUT)
 GPIO.setup (13, GPIO.IN)
 GPIO.setup (15, GPIO.OUT)
+
 
 while True:
       if not GPIO.input(11):
